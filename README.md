@@ -1,18 +1,16 @@
-## Sensu-Plugins-disk-checks
+## sensu-plugins-cassandra
 
-[![Build Status](https://travis-ci.org/sensu-plugins/sensu-plugins-cassandra.svg?branch=master)][1]
-[![Gem Version](https://badge.fury.io/rb/sensu-plugins-cassandra.svg)][2]
-[![Code Climate](https://codeclimate.com/github/sensu-plugins/sensu-plugins-cassandra/badges/gpa.svg)][3]
-[![Test Coverage](https://codeclimate.com/github/sensu-plugins/sensu-plugins-cassandra/badges/coverage.svg)][4]
-[![Dependency Status](https://gemnasium.com/sensu-plugins/sensu-plugins-cassandra.svg)][5]
+[![Build Status](https://travis-ci.org/sensu-plugins/sensu-plugins-cassandra.svg?branch=master)](https://travis-ci.org/sensu-plugins/sensu-plugins-cassandra)
+[![Gem Version](https://badge.fury.io/rb/sensu-plugins-cassandra.svg)](http://badge.fury.io/rb/sensu-plugins-cassandra)
+[![Code Climate](https://codeclimate.com/github/sensu-plugins/sensu-plugins-cassandra/badges/gpa.svg)](https://codeclimate.com/github/sensu-plugins/sensu-plugins-cassandra)
+[![Test Coverage](https://codeclimate.com/github/sensu-plugins/sensu-plugins-cassandra/badges/coverage.svg)](https://codeclimate.com/github/sensu-plugins/sensu-plugins-cassandra)
+[![Dependency Status](https://gemnasium.com/sensu-plugins/sensu-plugins-cassandra.svg)](https://gemnasium.com/sensu-plugins/sensu-plugins-cassandra)
 
 ## Functionality
 
 ## Files
- *
- *
- *
- *
+ * bin/check-cassandra-schema
+ * bin/metrics-cassandra-graphite
 
 ## Usage
 
@@ -41,7 +39,7 @@ Using the Sensu **sensu_gem** LWRP
 ```
 sensu_gem 'sensu-plugins-cassandra' do
   options('--prerelease')
-  version '0.0.1.alpha.4'
+  version '0.0.1'
 end
 ```
 
@@ -49,14 +47,8 @@ Using the Chef **gem_package** resource
 ```
 gem_package 'sensu-plugins-cassandra' do
   options('--prerelease')
-  version '0.0.1.alpha.4'
+  version '0.0.1'
 end
 ```
 
 ## Notes
-
-[1]:[https://travis-ci.org/sensu-plugins/sensu-plugins-cassandra]
-[2]:[http://badge.fury.io/rb/sensu-plugins-cassandra]
-[3]:[https://codeclimate.com/github/sensu-plugins/sensu-plugins-cassandra]
-[4]:[https://codeclimate.com/github/sensu-plugins/sensu-plugins-cassandra]
-[5]:[https://gemnasium.com/sensu-plugins/sensu-plugins-cassandra]
