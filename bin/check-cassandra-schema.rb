@@ -29,12 +29,12 @@
 #   for details.
 #
 
-# #YELLOW
-# rubocop:disable AssignmentInCondition
-require 'rubygems' if RUBY_VERSION < '1.9.0'
 require 'sensu-plugin/check/cli'
 require 'English'
 
+#
+# Check Cassandra Schema
+#
 class CheckCassandraSchema < Sensu::Plugin::Check::CLI
   option :hostname,
          short: '-h HOSTNAME',
@@ -54,7 +54,7 @@ class CheckCassandraSchema < Sensu::Plugin::Check::CLI
     [out, $CHILD_STATUS]
   end
 
-  def run
+  def run # rubocop:disable all
     out, rc = nodetool_cmd('describecluster')
     if rc != 0
       critical(out)
@@ -63,12 +63,12 @@ class CheckCassandraSchema < Sensu::Plugin::Check::CLI
     bad_nodes = []
     # #YELLOW
     out.each_line do |line|  # rubocop:disable Style/Next
-      if m = line.match(/\s+UNREACHABLE:\s+(.*)\[(.*)\]\s+$/)
+      if m = line.match(/\s+UNREACHABLE:\s+(.*)\[(.*)\]\s+$/)# rubocop:disable all
         bad_nodes << m[2]
         next
       end
       if bad_nodes.count > 0
-        if m = line.match(/\s+(.*)\[(.*)\]\s+$/)
+        if m = line.match(/\s+(.*)\[(.*)\]\s+$/)# rubocop:disable all
           bad_nodes << m[2]
         end
       end

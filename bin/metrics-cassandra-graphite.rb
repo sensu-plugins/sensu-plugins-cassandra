@@ -66,9 +66,6 @@
 #   for details.
 #
 
-# #YELLOW
-# rubocop:disable AssignmentInCondition
-require 'rubygems' if RUBY_VERSION < '1.9.0'
 require 'sensu-plugin/metric/cli'
 require 'socket'
 
@@ -80,6 +77,9 @@ UNITS_FACTOR = {
   'TB' => 1024**4
 }
 
+#
+# Cassandra Metrics
+#
 class CassandraMetrics < Sensu::Plugin::Metric::CLI::Graphite
   option :hostname,
          short: '-h HOSTNAME',
@@ -185,36 +185,36 @@ class CassandraMetrics < Sensu::Plugin::Metric::CLI::Graphite
   # According to io/util/FileUtils.java units for load are:
   # TB/GB/MB/KB/bytes
   #
-  def parse_info
+  def parse_info# rubocop:disable all
     info = nodetool_cmd('info')
     # #YELLOW
     info.each_line do |line| # rubocop:disable Style/Next
-      if m = line.match(/^Exceptions\s*:\s+([0-9]+)$/)
+      if m = line.match(/^Exceptions\s*:\s+([0-9]+)$/)# rubocop:disable all
         output "#{config[:scheme]}.exceptions", m[1], @timestamp
       end
 
-      if m = line.match(/^Load\s*:\s+([0-9.]+)\s+([KMGT]B|bytes)$/)
+      if m = line.match(/^Load\s*:\s+([0-9.]+)\s+([KMGT]B|bytes)$/)# rubocop:disable all
         output "#{config[:scheme]}.load", convert_to_bytes(m[1], m[2]), @timestamp
       end
 
-      if m = line.match(/^Uptime[^:]+:\s+(\d+)$/)
+      if m = line.match(/^Uptime[^:]+:\s+(\d+)$/)# rubocop:disable all
         output "#{config[:scheme]}.uptime", m[1], @timestamp
       end
 
-      if m = line.match(/^Heap Memory[^:]+:\s+([0-9.]+)\s+\/\s+([0-9.]+)$/)
+      if m = line.match(/^Heap Memory[^:]+:\s+([0-9.]+)\s+\/\s+([0-9.]+)$/)# rubocop:disable all
         output "#{config[:scheme]}.heap.used", convert_to_bytes(m[1], 'MB'), @timestamp
         output "#{config[:scheme]}.heap.total", convert_to_bytes(m[2], 'MB'), @timestamp
       end
 
       # v1.1+
-      if m = line.match(/^Key Cache[^:]+: size ([0-9]+) \(bytes\), capacity ([0-9]+) \(bytes\), ([0-9]+) hits, ([0-9]+) requests/)
+      if m = line.match(/^Key Cache[^:]+: size ([0-9]+) \(bytes\), capacity ([0-9]+) \(bytes\), ([0-9]+) hits, ([0-9]+) requests/)# rubocop:disable all
         output "#{config[:scheme]}.key_cache.size", m[1], @timestamp
         output "#{config[:scheme]}.key_cache.capacity", m[2], @timestamp
         output "#{config[:scheme]}.key_cache.hits", m[3], @timestamp
         output "#{config[:scheme]}.key_cache.requests", m[4], @timestamp
       end
 
-      if m = line.match(/^Row Cache[^:]+: size ([0-9]+) \(bytes\), capacity ([0-9]+) \(bytes\), ([0-9]+) hits, ([0-9]+) requests/)
+      if m = line.match(/^Row Cache[^:]+: size ([0-9]+) \(bytes\), capacity ([0-9]+) \(bytes\), ([0-9]+) hits, ([0-9]+) requests/)# rubocop:disable all
         output "#{config[:scheme]}.row_cache.size", m[1], @timestamp
         output "#{config[:scheme]}.row_cache.capacity", m[2], @timestamp
         output "#{config[:scheme]}.row_cache.hits", m[3], @timestamp
@@ -247,13 +247,13 @@ class CassandraMetrics < Sensu::Plugin::Metric::CLI::Graphite
   # READ                         0
   # MUTATION                     0
   # REQUEST_RESPONSE             0
-  def parse_tpstats
+  def parse_tpstats# rubocop:disable all
     tpstats = nodetool_cmd('tpstats')
     tpstats.each_line do |line|
       next if line.match(/^Pool Name/)
       next if line.match(/^Message type/)
 
-      if m = line.match(/^(\w+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)$/)
+      if m = line.match(/^(\w+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)$/)# rubocop:disable all
         (thread, active, pending, completed, blocked, _) = m.captures
 
         output "#{config[:scheme]}.threadpool.#{thread}.active", active, @timestamp
@@ -262,7 +262,7 @@ class CassandraMetrics < Sensu::Plugin::Metric::CLI::Graphite
         output "#{config[:scheme]}.threadpool.#{thread}.blocked", blocked, @timestamp
       end
 
-      if m = line.match(/^(\w+)\s+(\d+)$/)
+      if m = line.match(/^(\w+)\s+(\d+)$/)# rubocop:disable all
         (message_type, dropped) = m.captures
         output "#{config[:scheme]}.message_type.#{message_type}.dropped", dropped, @timestamp
       end
@@ -278,7 +278,7 @@ class CassandraMetrics < Sensu::Plugin::Metric::CLI::Graphite
   def parse_compactionstats
     cstats = nodetool_cmd('compactionstats')
     cstats.each_line do |line|
-      if m = line.match(/^pending tasks:\s+([0-9]+)/)
+      if m = line.match(/^pending tasks:\s+([0-9]+)/)# rubocop:disable all
         output "#{config[:scheme]}.compactionstats.pending_tasks", m[1], @timestamp
       end
     end
@@ -318,7 +318,7 @@ class CassandraMetrics < Sensu::Plugin::Metric::CLI::Graphite
   # some notes on parsing cfstats output:
   # - a line preceeded by 1 tab contains keyspace metrics
   # - a line preceeded by 2 tabs contains column family metrics
-  def parse_cfstats
+  def parse_cfstats# rubocop:disable all
     def get_metric(string)
       string.strip!
       (metric, value) = string.split(': ')
@@ -343,9 +343,9 @@ class CassandraMetrics < Sensu::Plugin::Metric::CLI::Graphite
 
     cfstats.each_line do |line|
       num_indents = line.count("\t")
-      if m = line.match(/^Keyspace:\s+(\w+)$/)
+      if m = line.match(/^Keyspace:\s+(\w+)$/)# rubocop:disable all
         keyspace = m[1]
-      elsif m = line.match(/\t\tColumn Family[^:]*:\s+(\w+)$/)
+      elsif m = line.match(/\t\tColumn Family[^:]*:\s+(\w+)$/)# rubocop:disable all
         cf = m[1]
       elsif num_indents == 0
         # keyspace = nil
@@ -368,7 +368,7 @@ class CassandraMetrics < Sensu::Plugin::Metric::CLI::Graphite
     end
   end
 
-  def run
+  def run# rubocop:disable all
     @timestamp = Time.now.to_i
 
     parse_info    if config[:info]
