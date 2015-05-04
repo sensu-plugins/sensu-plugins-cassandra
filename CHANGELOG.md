@@ -12,6 +12,3 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 
 ### Added
 - initial release
-
-
-* identical functionality to the community-plugins repo
