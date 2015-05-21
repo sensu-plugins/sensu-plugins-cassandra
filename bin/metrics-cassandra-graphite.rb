@@ -254,7 +254,7 @@ class CassandraMetrics < Sensu::Plugin::Metric::CLI::Graphite
       next if line.match(/^Message type/)
 
       if m = line.match(/^(\w+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)$/)# rubocop:disable all
-        (thread, active, pending, completed, blocked, _) = m.captures
+        (thread, active, pending, completed, blocked) = m.captures
 
         output "#{config[:scheme]}.threadpool.#{thread}.active", active, @timestamp
         output "#{config[:scheme]}.threadpool.#{thread}.pending", pending, @timestamp
