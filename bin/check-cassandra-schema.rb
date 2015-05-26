@@ -14,6 +14,7 @@
 #
 # DEPENDENCIES:
 #   gem: sensu-plugin
+#   gem: english
 #   Cassandra's nodetool
 #
 # USAGE:
