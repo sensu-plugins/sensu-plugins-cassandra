@@ -318,8 +318,8 @@ class CassandraMetrics < Sensu::Plugin::Metric::CLI::Graphite
   # some notes on parsing cfstats output:
   # - a line preceeded by 1 tab contains keyspace metrics
   # - a line preceeded by 2 tabs contains column family metrics
-  def parse_cfstats# rubocop:disable all
-    def get_metric(string)
+  def parse_cfstats
+    def get_metric(string) # rubocop:disable NestedMethodDefinition
       string.strip!
       (metric, value) = string.split(': ')
       if metric.nil? || value.nil?
@@ -354,7 +354,7 @@ class CassandraMetrics < Sensu::Plugin::Metric::CLI::Graphite
         # a column family metric
         # #YELLOW
         if config[:filter_regex]
-          unless cf.match(config[:filter_regex]) # rubocop:disable IfUnlessModifier
+          unless cf.match(config[:filter_regex])
             next
           end
         end

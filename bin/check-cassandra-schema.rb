@@ -55,7 +55,7 @@ class CheckCassandraSchema < Sensu::Plugin::Check::CLI
     [out, $CHILD_STATUS]
   end
 
-  def run # rubocop:disable all
+  def run
     out, rc = nodetool_cmd('describecluster')
     if rc != 0
       critical(out)
