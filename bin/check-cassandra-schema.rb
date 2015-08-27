@@ -63,7 +63,7 @@ class CheckCassandraSchema < Sensu::Plugin::Check::CLI
 
     bad_nodes = []
     # #YELLOW
-    out.each_line do |line|  # rubocop:disable Style/Next
+    out.each_line do |line|
       if m = line.match(/\s+UNREACHABLE:\s+(.*)\[(.*)\]\s+$/)# rubocop:disable all
         bad_nodes << m[2]
         next

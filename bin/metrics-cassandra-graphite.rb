@@ -188,7 +188,7 @@ class CassandraMetrics < Sensu::Plugin::Metric::CLI::Graphite
   def parse_info# rubocop:disable all
     info = nodetool_cmd('info')
     # #YELLOW
-    info.each_line do |line| # rubocop:disable Style/Next
+    info.each_line do |line|
       if m = line.match(/^Exceptions\s*:\s+([0-9]+)$/)# rubocop:disable all
         output "#{config[:scheme]}.exceptions", m[1], @timestamp
       end
