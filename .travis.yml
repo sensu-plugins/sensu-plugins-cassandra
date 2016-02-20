@@ -1,19 +1,33 @@
 language: ruby
 cache:
-  - bundler
+- bundler
 install:
-  - bundle install
+- bundle install
 rvm:
-  - 1.9.3
-  - 2.0
-  - 2.1
-  - 2.2
+- 1.9.3
+- 2.0
+- 2.1
+- 2.2
 notifications:
   email:
     recipients:
-      - sensu-plugin@sensu-plugins.io
+    - sensu-plugin@sensu-plugins.io
     on_success: change
     on_failure: always
-
 script:
-  - 'bundle exec rake default'
+- bundle exec rake default
+- gem build sensu-plugins-cassandra.gemspec
+- gem install sensu-plugins-cassandra-*.gem
+deploy:
+  provider: rubygems
+  api_key:
+    secure: NEJgqUUESQiGwAIVKDLbpW9gR9zWwaJ9Mm8fPn7zh8gGrfUcmGT3t/NiK3xn/2f7OQDm34YxiVk+z4N90fSGB/SgLraTXzTHDWc8eyLpeCkqeotn/OeBbQ7M4mJNRtR/2nENhvbXhp3IDbzSAR8TzUyIp5junan4NbPOC2+Hms8=
+  gem: sensu-plugins-cassandra
+  on:
+    tags: true
+    all_branches: true
+    rvm: 1.9.3
+    rvm: 2.0
+    rvm: 2.1
+    rvm: 2.2
+    repo: sensu-plugins/sensu-plugins-cassandra
