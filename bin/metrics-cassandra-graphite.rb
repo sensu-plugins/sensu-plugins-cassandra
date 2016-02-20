@@ -75,7 +75,7 @@ UNITS_FACTOR = {
   'MB' => 1024**2,
   'GB' => 1024**3,
   'TB' => 1024**4
-}
+}.freeze
 
 #
 # Cassandra Metrics
@@ -250,8 +250,8 @@ class CassandraMetrics < Sensu::Plugin::Metric::CLI::Graphite
   def parse_tpstats# rubocop:disable all
     tpstats = nodetool_cmd('tpstats')
     tpstats.each_line do |line|
-      next if line.match(/^Pool Name/)
-      next if line.match(/^Message type/)
+      next if line =~ /^Pool Name/
+      next if line =~ /^Message type/
 
       if m = line.match(/^(\w+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)$/)# rubocop:disable all
         (thread, active, pending, completed, blocked) = m.captures
@@ -322,7 +322,7 @@ class CassandraMetrics < Sensu::Plugin::Metric::CLI::Graphite
     def get_metric(string) # rubocop:disable NestedMethodDefinition
       string.strip!
       (metric, value) = string.split(': ')
-      if metric.nil? || value.nil?
+      if metric.nil? || value.nil? # rubocop:disable Style/GuardClause
         return [nil, nil]
       else
         # sanitize metric names for graphite
