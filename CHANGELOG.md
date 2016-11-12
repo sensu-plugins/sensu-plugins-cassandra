@@ -4,10 +4,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
-
-## [0.0.5] - 2018-08-16
 ### Changed
 - Updated some metrics does not shown due new nodetool version.
+
+## [0.0.5] - 2016-08-16
+### Changed
 - Updated sensu-plugin dependency from `= 1.2.0` to `~> 1.2.0`
 
 ## [0.0.4] - 2015-08-04
