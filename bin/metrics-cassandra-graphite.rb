@@ -72,9 +72,13 @@ require 'socket'
 UNITS_FACTOR = {
   'bytes' => 1,
   'KB' => 1024,
+  'KiB' => 1024,
   'MB' => 1024**2,
+  'MiB' => 1024**2,
   'GB' => 1024**3,
-  'TB' => 1024**4
+  'GiB' => 1024**3,
+  'TB' => 1024**4,
+  'TiB' => 1024**4
 }.freeze
 
 #
@@ -193,7 +197,7 @@ class CassandraMetrics < Sensu::Plugin::Metric::CLI::Graphite
         output "#{config[:scheme]}.exceptions", m[1], @timestamp
       end
 
-      if m = line.match(/^Load\s*:\s+([0-9.]+)\s+([KMGT]B|bytes)$/)# rubocop:disable all
+      if m = line.match(/^Load\s*:\s+([0-9.]+)\s+([KMGT]i?B|bytes)$/)# rubocop:disable all
         output "#{config[:scheme]}.load", convert_to_bytes(m[1], m[2]), @timestamp
       end
 
@@ -343,7 +347,7 @@ class CassandraMetrics < Sensu::Plugin::Metric::CLI::Graphite
 
     cfstats.each_line do |line|
       num_indents = line.count("\t")
-      if m = line.match(/^Keyspace:\s+(\w+)$/)# rubocop:disable all
+      if m = line.match(/^Keyspace\s?:\s+(\w+)$/)# rubocop:disable all
         keyspace = m[1]
       elsif m = line.match(/\t\tColumn Family[^:]*:\s+(\w+)$/)# rubocop:disable all
         cf = m[1]
