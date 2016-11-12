@@ -7,6 +7,7 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 
 ## [0.0.5] - 2018-08-16
 ### Changed
+- Updated some metrics does not shown due new nodetool version.
 - Updated sensu-plugin dependency from `= 1.2.0` to `~> 1.2.0`
 
 ## [0.0.4] - 2015-08-04
