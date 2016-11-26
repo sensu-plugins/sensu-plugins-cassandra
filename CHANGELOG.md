@@ -7,6 +7,12 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 ### Changed
 - Updated some metrics does not shown due new nodetool version.
 
+### Added
+- Ruby 2.3.0 support
+
+### Removed
+- Ruby 1.9.3 support
+
 ## [0.0.5] - 2016-08-16
 ### Changed
 - Updated sensu-plugin dependency from `= 1.2.0` to `~> 1.2.0`
