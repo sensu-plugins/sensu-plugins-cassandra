@@ -1,13 +1,14 @@
-#Change Log
+# Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
 
+## [1.1.0] 2017-07-26
 ### Added
-- Support Ruby 2.4.1
-- Added key cache parsing for newer nodetool version
+- Test Ruby 2.4.1 (@thomasriley)
+- metrics-cassandra-graphite.rb: Added key cache parsing for newer nodetool version (@jthunt)
 
 ## [1.0.0] - 2016-11-26
 ### Changed

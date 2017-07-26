@@ -12,7 +12,7 @@
 
 - [ ] RuboCop passes
 
-- [ ] Existing tests pass 
+- [ ] Existing tests pass
 
 #### New Plugins
 
@@ -25,4 +25,3 @@
 #### Purpose
 
 #### Known Compatibility Issues
-
