@@ -5,6 +5,9 @@ This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins
 
 ## [Unreleased]
 
+### Fixed
+- metrics-cassandra-graphite.rb: fixed conditional assignments broken by agressive rubocop rule fix and following the instructions during a demo (@majormoses)
+
 ## [2.0.1] - 2018-01-23
 ### Changed
 - no-op change (@majormoses)
