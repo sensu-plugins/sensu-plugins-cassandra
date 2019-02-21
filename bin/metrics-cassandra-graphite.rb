@@ -348,7 +348,7 @@ class CassandraMetrics < Sensu::Plugin::Metric::CLI::Graphite
         metric.downcase!
         # sanitize metric values for graphite. Numbers only, please.
         # some versions of nodetool omit the '.' following the 'ms' unit.
-        value = value.chomp(' ms.').chomp(' ms').gsub(/([0-9.]+)$/, '\1')
+        value = value.chomp(' ms.').chomp(' ms')
       end
       [metric, value]
     end
