@@ -5,6 +5,13 @@ This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins
 
 ## [Unreleased]
 
+## [2.1.0] - 2019-03-04
+### Added
+- metrics-cassandra-graphite.rb: Earlier versions of nodetool incorrectly append a `.` to the `ms` SI unit. In newer versions where this has been corrected, the missing `.` failed to match causing a missed `chomp` operation. (@zenmetsu)
+
+### Removed
+- metrics-cassandra-graphite.rb: removed superfluous gsub operation (@zenmetsu) (@majormoses)
+
 ## [2.0.2] - 2018-01-25
 ### Fixed
 - metrics-cassandra-graphite.rb: fixed conditional assignments broken by agressive rubocop rule fix and following the instructions during a demo (@majormoses)
@@ -61,7 +68,8 @@ This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins
 ### Added
 - initial release
 
-[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-cassandra/compare/2.0.2...HEAD
+[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-cassandra/compare/2.1.0...HEAD
+[2.1.0]: https://github.com/sensu-plugins/sensu-plugins-cassandra/compare/2.0.2...2.1.0
 [2.0.2]: https://github.com/sensu-plugins/sensu-plugins-cassandra/compare/2.0.1...2.0.2
 [2.0.1]: https://github.com/sensu-plugins/sensu-plugins-cassandra/compare/2.0.0...2.0.1
 [2.0.0]: https://github.com/sensu-plugins/sensu-plugins-cassandra/compare/1.0.0...2.0.0
