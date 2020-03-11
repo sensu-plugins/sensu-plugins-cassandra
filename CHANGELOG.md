@@ -5,6 +5,10 @@ This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins
 
 ## [Unreleased]
 
+## [2.1.1] - 2019-03-04
+### Changed
+- metrics-cassandra-graphite.rb: Added support for Row Cache in Cassandra 3.0+
+
 ## [2.1.0] - 2019-03-04
 ### Added
 - metrics-cassandra-graphite.rb: Earlier versions of nodetool incorrectly append a `.` to the `ms` SI unit. In newer versions where this has been corrected, the missing `.` failed to match causing a missed `chomp` operation. (@zenmetsu)
