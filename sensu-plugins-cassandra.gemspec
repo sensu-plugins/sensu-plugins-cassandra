@@ -32,7 +32,7 @@ Gem::Specification.new do |s| # rubocop:disable Metrics/BlockLength
   s.test_files             = s.files.grep(%r{^(test|spec|features)/})
   s.version                = SensuPluginsCassandra::Version::VER_STRING
 
-  s.add_runtime_dependency 'english',      '0.6.3'
+  s.add_runtime_dependency 'english',      '0.7.0'
   s.add_runtime_dependency 'sensu-plugin', '~> 1.2'
 
   s.add_development_dependency 'bundler',                   '~> 1.7'
