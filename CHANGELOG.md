@@ -4,7 +4,20 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins/community/blob/master/HOW_WE_CHANGELOG.md)
 
 ## [Unreleased]
+### Breaking Changes
+- Update minimum required ruby version to 2.3. Drop unsupported ruby versions.
+- Bump `sensu-plugin` dependency to `~> 4.0`
+
+### Added
+- Bonsai asset support
+
 ### Changed
+- Updated english dependency to '0.7.0'
+- Updated bundler dependency to '~> 2.1'
+- Updated rubocop dependency to '~> 0.81.0'
+- Remediated rubocop issues
+- Updated rake dependency to '~> 13.0'
+- Update codeclimate-test-reporter to '~> 1.0'
 - metrics-cassandra-graphite.rb: Added support for Row Cache in Cassandra 3.0+
 
 ## [2.1.0] - 2019-03-04

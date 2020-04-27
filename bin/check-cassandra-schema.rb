@@ -1,4 +1,6 @@
 #! /usr/bin/env ruby
+# frozen_string_literal: true
+
 #
 # check-cassandra-schema
 #
@@ -68,14 +70,14 @@ class CheckCassandraSchema < Sensu::Plugin::Check::CLI
         bad_nodes << m[2]
         next
       end
-      if bad_nodes.count > 0
+      if bad_nodes.count > 0 # rubocop: disable Style/NumericPredicate
         if m = line.match(/\s+(.*)\[(.*)\]\s+$/)# rubocop:disable all
           bad_nodes << m[2]
         end
       end
     end
 
-    if bad_nodes.count > 0
+    if bad_nodes.count > 0 # rubocop: disable Style/NumericPredicate
       critical('nodes ' + bad_nodes.join(', ') + ' are in schema disagreement')
     else
       ok
