@@ -32,7 +32,7 @@ deploy:
     rvm: 2.4.1
     repo: sensu-plugins/sensu-plugins-cassandra
 - provider: script
-  script: bonsai/ruby-runtime/travis-build-ruby-plugin-assets.sh sensu-plugins-hardware
+  script: bonsai/ruby-runtime/travis-build-ruby-plugin-assets.sh sensu-plugins-cassandra
   skip_cleanup: true
   on:
     tags: true
