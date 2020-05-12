@@ -5,6 +5,10 @@ This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins
 
 ## [Unreleased]
 
+## [3.0.1] - 2020-05-12
+### Changed
+- Nothing, rolled version to force Travis build after failure
+
 ## [3.0.0] - 2020-05-12
 ### Breaking Changes
 - Update minimum required ruby version to 2.3. Drop unsupported ruby versions.
@@ -85,7 +89,8 @@ This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins
 ### Added
 - initial release
 
-[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-cassandra/compare/3.0.0...HEAD
+[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-cassandra/compare/3.0.1...HEAD
+[3.0.1]: https://github.com/sensu-plugins/sensu-plugins-cassandra/compare/3.0.0...3.0.1
 [3.0.0]: https://github.com/sensu-plugins/sensu-plugins-cassandra/compare/2.1.0...3.0.0
 [2.1.0]: https://github.com/sensu-plugins/sensu-plugins-cassandra/compare/2.0.2...2.1.0
 [2.0.2]: https://github.com/sensu-plugins/sensu-plugins-cassandra/compare/2.0.1...2.0.2
