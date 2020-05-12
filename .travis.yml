@@ -1,11 +1,11 @@
 language: ruby
+services:
+- docker
 cache:
 - bundler
 install:
 - bundle install
 rvm:
-- 2.1
-- 2.2
 - 2.3.0
 - 2.4.1
 notifications:
@@ -18,16 +18,23 @@ script:
 - bundle exec rake default
 - gem build sensu-plugins-cassandra.gemspec
 - gem install sensu-plugins-cassandra-*.gem
+before_deploy:
+- bash -c "[ ! -d bonsai/ ] && git clone https://github.com/sensu/sensu-go-bonsai-asset.git bonsai || echo 'bonsai/ exists, skipping git clone'"
 deploy:
-  provider: rubygems
+- provider: rubygems
   api_key:
     secure: NEJgqUUESQiGwAIVKDLbpW9gR9zWwaJ9Mm8fPn7zh8gGrfUcmGT3t/NiK3xn/2f7OQDm34YxiVk+z4N90fSGB/SgLraTXzTHDWc8eyLpeCkqeotn/OeBbQ7M4mJNRtR/2nENhvbXhp3IDbzSAR8TzUyIp5junan4NbPOC2+Hms8=
   gem: sensu-plugins-cassandra
   on:
     tags: true
     all_branches: true
-    rvm: 2.1
-    rvm: 2.2
     rvm: 2.3.0
     rvm: 2.4.1
     repo: sensu-plugins/sensu-plugins-cassandra
+- provider: script
+  script: bonsai/ruby-runtime/travis-build-ruby-plugin-assets.sh sensu-plugins-cassandra
+  skip_cleanup: true
+  on:
+    tags: true
+    all_branches: true
+    rvm: 2.4.1

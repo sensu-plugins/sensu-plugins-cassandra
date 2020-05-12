@@ -1,4 +1,6 @@
 #! /usr/bin/env ruby
+# frozen_string_literal: true
+
 #
 #   cassandra-graphite
 #
@@ -222,7 +224,7 @@ class CassandraMetrics < Sensu::Plugin::Metric::CLI::Graphite
       # cassandra nodetool v3.0+  Changed the key cache output
       # Key Cache : entries 569669, size 100 MiB, capacity 100 MiB, 35689224 hits, 70654365 requests, 0.505 recent hit rate, 14400 save period in seconds
       # Key Cache : entries 13291, size 7.83 MB, capacity 50 MB, 119444 hits, 139720 requests, 0.855 recent hit rate, 14400 save period in seconds
-      if (m = line.match(/^Key Cache[^:]+: entries ([0-9]+), size ([-+]?[0-9]*\.?[0-9]+) ([KMGT]i?B|bytes), capacity ([-+]?[0-9]*\.?[0-9]+) ([KMGT]i?B|bytes), ([0-9]+) hits, ([0-9]+) requests, ([-+]?[0-9]*\.?[0-9]+) recent hit rate/)) # rubocop:disable Metrics/LineLength
+      if (m = line.match(/^Key Cache[^:]+: entries ([0-9]+), size ([-+]?[0-9]*\.?[0-9]+) ([KMGT]i?B|bytes), capacity ([-+]?[0-9]*\.?[0-9]+) ([KMGT]i?B|bytes), ([0-9]+) hits, ([0-9]+) requests, ([-+]?[0-9]*\.?[0-9]+) recent hit rate/)) # rubocop:disable Layout/LineLength
         output "#{config[:scheme]}.key_cache.size", convert_to_bytes(m[2], m[3]), @timestamp
         output "#{config[:scheme]}.key_cache.capacity", convert_to_bytes(m[4], m[5]), @timestamp
         output "#{config[:scheme]}.key_cache.hits", m[6], @timestamp
@@ -240,7 +242,7 @@ class CassandraMetrics < Sensu::Plugin::Metric::CLI::Graphite
       # cassandra nodetool v3.0+  Changed the row cache output
       # Row Cache : entries 569669, size 100 MiB, capacity 100 MiB, 35689224 hits, 70654365 requests, 0.505 recent hit rate, 14400 save period in seconds
       # Row Cache : entries 13291, size 7.83 MB, capacity 50 MB, 119444 hits, 139720 requests, 0.855 recent hit rate, 14400 save period in seconds
-      if (m = line.match(/^Row Cache[^:]+: entries ([0-9]+), size ([-+]?[0-9]*\.?[0-9]+) ([KMGT]i?B|bytes), capacity ([-+]?[0-9]*\.?[0-9]+) ([KMGT]i?B|bytes), ([0-9]+) hits, ([0-9]+) requests, ([-+]?[0-9]*\.?[0-9]+) recent hit rate/)) # rubocop:disable Metrics/LineLength
+      if (m = line.match(/^Row Cache[^:]+: entries ([0-9]+), size ([-+]?[0-9]*\.?[0-9]+) ([KMGT]i?B|bytes), capacity ([-+]?[0-9]*\.?[0-9]+) ([KMGT]i?B|bytes), ([0-9]+) hits, ([0-9]+) requests, ([-+]?[0-9]*\.?[0-9]+) recent hit rate/)) # rubocop:disable Layout/LineLength
         output "#{config[:scheme]}.row_cache.size", convert_to_bytes(m[2], m[3]), @timestamp
         output "#{config[:scheme]}.row_cache.capacity", convert_to_bytes(m[4], m[5]), @timestamp
         output "#{config[:scheme]}.row_cache.hits", m[6], @timestamp
@@ -346,7 +348,7 @@ class CassandraMetrics < Sensu::Plugin::Metric::CLI::Graphite
   # - a line preceeded by 1 tab contains keyspace metrics
   # - a line preceeded by 2 tabs contains column family metrics
   def parse_cfstats
-    def get_metric(string) # rubocop:disable NestedMethodDefinition
+    def get_metric(string) # rubocop:disable Lint/NestedMethodDefinition
       string.strip!
       (metric, value) = string.split(': ')
       if metric.nil? || value.nil? # rubocop:disable Style/GuardClause
@@ -361,6 +363,7 @@ class CassandraMetrics < Sensu::Plugin::Metric::CLI::Graphite
         # some versions of nodetool omit the '.' following the 'ms' unit.
         value = value.chomp(' ms.').chomp(' ms')
       end
+
       [metric, value]
     end
 
