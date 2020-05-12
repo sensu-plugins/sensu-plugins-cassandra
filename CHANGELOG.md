@@ -5,6 +5,10 @@ This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins
 
 ## [Unreleased]
 
+## [3.0.1] - 2020-05-12
+### Changed
+- Nothing, rolled version to force Travis build after failure
+
 ## [3.0.0] - 2020-05-12
 ### Breaking Changes
 - Update minimum required ruby version to 2.3. Drop unsupported ruby versions.
