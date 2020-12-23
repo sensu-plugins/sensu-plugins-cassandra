@@ -34,7 +34,7 @@ Gem::Specification.new do |s|
   s.test_files             = s.files.grep(%r{^(test|spec|features)/})
   s.version                = SensuPluginsCassandra::Version::VER_STRING
 
-  s.add_runtime_dependency 'english',      '0.7.0'
+  s.add_runtime_dependency 'english',      '0.7.1'
   s.add_runtime_dependency 'sensu-plugin', '~> 4.0'
 
   s.add_development_dependency 'bundler',                   '~> 2.1'
